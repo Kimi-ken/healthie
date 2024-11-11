@@ -1,0 +1,171 @@
+body{
+    font-family: "Montserrat";
+}
+
+.container-fluid{
+    
+        background-image: url('images/gabin-vallet-J154nEkpzlQ-unsplash.jpg'); /* Replace with your image URL */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: white;
+        opacity: 0.8;
+       
+    }
+    
+            
+            
+
+.white-section{
+    background-color: #fff;
+
+}
+.navbar{
+    padding-top: 0.3px;
+    padding-bottom: 0.4px;
+}
+.navbar-brand{
+    font-family: "Ubuntu";
+    font-size: 3rem;
+    font-weight: bold;
+ 
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: black;
+
+    
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: green;
+  
+}
+h1{
+    font-family: "Montserrat";
+    font-size: 3.5em;
+    line-height: 1.5;
+    font-weight: 900;
+}
+#title .container-fluid{
+    padding: 3% 15% 27%;
+}
+
+
+.nav-item{
+    padding: 0 10px;
+    
+    
+}
+.nav-link{
+    font-size: 1.5rem;
+    font-family: "Montserrat";
+    font-weight: bold;
+    color: #87CEEB;
+   
+}
+.button-download{
+    margin: 5% 3% 5% 0;
+}
+.title-image{
+    width: 60%;
+    transform: rotate(25deg);
+    position: absolute;
+    right: 30%;
+}
+#features{
+ padding: 7% 15%;
+ 
+ position: relative;
+ 
+ 
+}
+
+.feature-box{
+    text-align: center;
+    padding: 5%;
+}
+h3{
+    font-family: "Montserrat";
+    font-weight: bold;
+}
+
+
+
+.icon{
+    color:lightseagreen;
+    margin-bottom:1rem ;
+}
+.icon:hover{
+    color:green;
+}
+#testimonials{
+    color: white;
+    padding: 7% 15%;
+    text-align: center;
+    background-color: #4682B4;
+    
+}
+h2{
+    font-size: 3rem;
+    font-family: "Montserrat";
+    font-weight: 900;
+    line-height: 1.5;
+   
+
+}
+.testimonial-image{
+    width: 10%;
+    border-radius: 100%;
+    margin: 20px;
+}
+#press{
+    background-color: #4682B4;
+    text-align: center;
+    padding-bottom: 3%;
+
+}
+.press-logo{
+    width: 15%;
+    margin: 20px 20px 50px;
+
+}
+.carousel-item{
+    padding: 7% 15%;
+
+}
+#pricing{
+    padding: 100px;
+    color: black;
+}
+.pricing-column{
+    padding: 3% 2%;
+    text-align: center;
+
+}
+#cta{
+    
+    padding: 7% 15%;
+    text-align: center;
+
+}
+.cta-1{
+    font-family: "Montserrat";
+    font-weight: 900;
+    font-size: 3.5rem;
+    
+    line-height: 1.5;
+}
+#footer{
+    padding: 7% 15%;
+    text-align: center;
+    color: black;
+}
+.soc{
+    margin:20px 10px ;
+}
+@media(max-width:1028px){
+    #title{
+        text-align: center;
+    }
+    
+}

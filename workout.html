@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Finder</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="index.html" class="btn btn-home">Home</a>
+    </div>
+    <div class="container">
+        <h1>Exercise Finder</h1>
+        <p style="color: gray;">Powered by HealthyMe</p>
+        <form id="exercise-form">
+            <div class="form-group">
+                <label for="exercise-name">Exercise Name (optional):</label>
+                <input type="text" id="exercise-name">
+            </div>
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select id="type" required>
+                    <option value="">Select Type</option>
+                    <option value="strength">Strength</option>
+                    <option value="cardio">Cardio</option>
+                </select>
+            </div>
+            <div class="form-group" id="muscle-group">
+                <label for="muscle">Muscle:</label>
+                <select id="muscle" required>
+                    <option value="">Select Muscle</option>
+                    <option value="biceps">Biceps</option>
+                    <option value="triceps">Triceps</option>
+                    <option value="chest">Chest</option>
+                    <option value="back">Back</option>
+                    <option value="legs">Legs</option>
+                    <option value="shoulders">Shoulders</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty" required>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+            <button type="submit">Find Exercise</button>
+        </form>
+        <a href="exercise.html" class="btn btn-refresh">Refresh</a>
+    </div>
+
+    <script>
+        document.getElementById('exercise-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const exerciseName = document.getElementById('exercise-name').value;
+            const type = document.getElementById('type').value;
+            const muscle = document.getElementById('muscle').value;
+            const difficulty = document.getElementById('difficulty').value;
+            const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+
+            // Fetch exercise data from API
+            fetch(`https://api.example.com/exercises?name=${exerciseName}&type=${type}&muscle=${muscle}&difficulty=${difficulty}&apiKey=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    let resultText = `<h1>Exercise Results</h1><p>Found ${data.length} exercises:</p><ul>`;
+                    data.forEach(exercise => {
+                        resultText += `<li><strong>${exercise.name}</strong>: ${exercise.description}</li>`;
+                    });
+                    resultText += `</ul>`;
+
+                    // Open a new window and write the result to it
+                    const newWindow = window.open('', '_blank');
+                    newWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Exercise Results</title>
+                            <link rel="stylesheet" href="style1.css">
+                        </head>
+                        <body>
+                            <div class="result-container">
+                                ${resultText}
+                            </div>
+                        </body>
+                        </html>
+                    `);
+                    newWindow.document.close();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    const newWindow = window.open('', '_blank');
+                    newWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Error</title>
+                            <link rel="stylesheet" href="style1.css">
+                        </head>
+                        <body>
+                            <div class="result-container">
+                                <h1>Error</h1>
+                                <p>Error fetching data. Please try again later.</p>
+                            </div>
+                        </body>
+                        </html>
+                    `);
+                    newWindow.document.close();
+                });
+        });
+
+        document.getElementById('type').addEventListener('change', function() {
+            const type = this.value;
+            const muscleGroup = document.getElementById('muscle-group');
+            if (type === 'cardio') {
+                muscleGroup.style.display = 'none';
+            } else {
+                muscleGroup.style.display = 'block';
+            }
+        });
+
+        function refreshPage() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
