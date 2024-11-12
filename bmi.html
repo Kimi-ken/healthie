@@ -1,115 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- By Ali Aslan -->
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator</title>
     <link rel="stylesheet" href="style1.css">
+    <title>BMI Calculator</title>
 </head>
+
 <body>
-    <div class="sidebar">
-        <a href="index.html" class="btn btn-home">Home</a>
-    </div>
+
     <div class="container">
-        <h1>BMI Calculator</h1>
-        <p style="color: gray;">Powered by ByteMe</p>
-        <form id="bmi-form">
-            <div class="form-group">
-                <label for="height">Height (cm):</label>
-                <input type="number" id="height" required>
+        <div class="box">
+            <h1>BMI Calculator</h1>
+            <div class="content">
+
+
+                <div class="input">
+                    <label for="height">Age</label>
+                    <input type="text" class="text-input" id="age" autocomplete="off" required />
+                </div>
+
+                <div class="gender">
+
+                    <label class="container">
+                        <input type="radio" name="radio" id="m">
+                        <p class="text">Male</p>
+                        <span class="checkmark"></span>
+                    </label>
+
+
+                    <label class="container">
+                        <input type="radio" name="radio" id="f">
+                        <p class="text">Female</p>
+                        <span class="checkmark"></span>
+                    </label>
+
+                </div>
+
+                <div class="containerHW">
+                    <div class="inputH">
+                        <label for="height">Height(cm)</label>
+                        <input type="number" id="height" required>
+                    </div>
+
+                    <div class="inputW">
+                        <label for="weight">Weight(kg)</label>
+                        <input type="number" id="weight" required>
+                    </div>
+                </div>
+
+                <button class="calculate" id="submit" onclick="calculate();">Calculate BMI</button>
             </div>
-            <div class="form-group">
-                <label for="weight">Weight (kg):</label>
-                <input type="number" id="weight" required>
+            <div class="result">
+                <p>Your BMI is</p>
+                <div id="result">00.00</div>
+                <p class="comment"></p>
             </div>
-            <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="number" id="age" required>
-            </div>
-            <div class="form-group">
-                <label for="sex">Sex:</label>
-                <select id="sex" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </div>
-            <button type="submit">Calculate BMI</button>
-        </form>
-        <a href="bmi.html" class="btn btn-refresh">Refresh</a>
+            <div class="footer"><a class="footer-text" target="_blank" href="#">By ByteMe</a></div>
+
+
+
+        </div>
     </div>
 
-    <script>
-        document.getElementById('bmi-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const height = parseFloat(document.getElementById('height').value) / 100;
-            const weight = parseFloat(document.getElementById('weight').value);
-            const age = parseInt(document.getElementById('age').value);
-            const sex = document.getElementById('sex').value;
-            const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+    
 
-            // Calculate BMI
-            const bmi = (weight / (height * height)).toFixed(2);
 
-            // Fetch additional data from API
-            fetch(`https://api.example.com/bmi?height=${height}&weight=${weight}&age=${age}&sex=${sex}&apiKey=${apiKey}`)
-                .then(response => response.json())
-                .then(data => {
-                    let resultText = `Your BMI is ${bmi}. `;
-                    if (bmi < 18.5) {
-                        resultText += "You are underweight.";
-                    } else if (bmi < 24.9) {
-                        resultText += "You have a normal weight.";
-                    } else if (bmi < 29.9) {
-                        resultText += "You are overweight.";
-                    } else {
-                        resultText += "You are obese.";
-                    }
-                    resultText += ` Additional info: ${data.additionalInfo}`;
 
-                    // Open a new window and write the result to it
-                    const newWindow = window.open('', '_blank');
-                    newWindow.document.write(`
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>BMI Results</title>
-                            <link rel="stylesheet" href="style1.css">
-                        </head>
-                        <body>
-                            <div class="result-container">
-                                <h1>BMI Results</h1>
-                                <p>${resultText}</p>
-                            </div>
-                        </body>
-                        </html>
-                    `);
-                    newWindow.document.close();
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    const newWindow = window.open('', '_blank');
-                    newWindow.document.write(`
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Error</title>
-                            <link rel="stylesheet" href="style1.css">
-                        </head>
-                        <body>
-                            <div class="result-container">
-                                <h1>Error</h1>
-                                <p>Error fetching data. Please try again later.</p>
-                            </div>
-                        </body>
-                        </html>
-                    `);
-                    newWindow.document.close();
-                });
-        });
-    </script>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+
+
+
+    <script src="bmi.js"></script>
+
 </body>
+
 </html>
